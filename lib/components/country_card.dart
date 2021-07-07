@@ -43,6 +43,7 @@ class CountryCard extends StatelessWidget {
                     si: ScalableImageSource.fromSvgHttpUrl(
                       Uri.parse(flag),
                     ),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
