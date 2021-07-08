@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "/": (context) => Home(),
-        "/detail": (context) => Detail(),
+        Detail.routeName: (context) => Detail()
       },
     );
   }

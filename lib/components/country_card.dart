@@ -1,3 +1,4 @@
+import 'package:countries/screens/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jovial_svg/jovial_svg.dart';
@@ -31,7 +32,11 @@ class CountryCard extends StatelessWidget {
         width: double.infinity,
         child: InkWell(
           onTap: () {
-            print("Card is tapped");
+            Navigator.pushNamed(
+              context,
+              Detail.routeName,
+              arguments: DetailArguments(countryName: countryName),
+            );
           },
           child: Column(
             children: [
