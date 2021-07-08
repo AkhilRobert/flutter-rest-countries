@@ -9,7 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late Future<Iterable<Country>> _countries;
+  late Future<List<Country>> _countries;
 
   @override
   void initState() {
@@ -18,32 +18,40 @@ class _HomeState extends State<Home> {
   }
 
   Widget countryList() {
-    return FutureBuilder(
+    return FutureBuilder<List<Country>>(
       future: _countries,
-      builder: (BuildContext ctx, AsyncSnapshot<Iterable<Country>> snap) {
-        if (snap.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snap.hasData) {
-          // If we got the data
-          var data = snap.data!.toList();
+      builder: (ctx, snap) {
+        if (snap.hasData) {
+          var data = snap.data;
+
+          if (data == null) {
+            print("Data is null");
+
+            return Center(
+              child: Text("No data "),
+            );
+          }
 
           return ListView.builder(
-            itemCount: snap.data!.length,
-            itemBuilder: (ctx, index) {
+            itemCount: data.length,
+            itemBuilder: (ctx, idx) {
               return CountryCard(
-                countryName: data[index].countryName,
-                popluation: data[index].population,
-                capital: data[index].capital,
-                region: data[index].region,
-                flag: data[index].flag,
+                countryName: data[idx].countryName,
+                popluation: data[idx].population,
+                capital: data[idx].capital,
+                region: data[idx].region,
+                flag: data[idx].flag,
               );
             },
           );
-        } else {
-          return Text("data");
+        } else if (snap.hasError) {
+          var msg = snap.error.toString();
+          print(msg);
+          return Text(msg);
         }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
