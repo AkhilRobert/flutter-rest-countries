@@ -1,22 +1,13 @@
+import 'package:countries/models/country.dart';
 import 'package:countries/screens/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jovial_svg/jovial_svg.dart';
 
 class CountryCard extends StatelessWidget {
-  final String countryName;
-  final int popluation;
-  final String region;
-  final String capital;
-  final String flag;
+  final Country country;
 
-  const CountryCard({
-    required this.countryName,
-    required this.popluation,
-    required this.region,
-    required this.capital,
-    required this.flag,
-  });
+  const CountryCard({required this.country});
 
   String _formatNumber(int number) {
     var f = NumberFormat("##,###", "en_US");
@@ -35,7 +26,7 @@ class CountryCard extends StatelessWidget {
             Navigator.pushNamed(
               context,
               Detail.routeName,
-              arguments: DetailArguments(countryName: countryName),
+              arguments: DetailArguments(country: country),
             );
           },
           child: Column(
@@ -46,7 +37,7 @@ class CountryCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   child: ScalableImageWidget.fromSISource(
                     si: ScalableImageSource.fromSvgHttpUrl(
-                      Uri.parse(flag),
+                      Uri.parse(country.flag),
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -60,7 +51,7 @@ class CountryCard extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        countryName,
+                        country.countryName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -80,7 +71,7 @@ class CountryCard extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            Text(_formatNumber(popluation))
+                            Text(_formatNumber(country.population))
                           ],
                         ),
                       ),
@@ -98,7 +89,7 @@ class CountryCard extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            Text(region)
+                            Text(country.region)
                           ],
                         ),
                       ),
@@ -116,7 +107,7 @@ class CountryCard extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            Text(capital)
+                            Text(country.capital)
                           ],
                         ),
                       ),

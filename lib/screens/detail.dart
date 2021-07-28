@@ -1,9 +1,10 @@
+import 'package:countries/models/country.dart';
 import 'package:flutter/material.dart';
 
 class DetailArguments {
-  final String countryName;
+  final Country country;
 
-  DetailArguments({required this.countryName});
+  DetailArguments({required this.country});
 }
 
 class Detail extends StatelessWidget {
@@ -16,7 +17,7 @@ class Detail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          args.countryName,
+          args.country.nativeName,
           style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
@@ -26,7 +27,7 @@ class Detail extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: Center(
-        child: Text("This is the detail screen for ${args.countryName}"),
+        child: Text("This is the detail screen for ${args.country.nativeName}"),
       ),
     );
   }

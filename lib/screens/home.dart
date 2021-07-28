@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
             print("Data is null");
 
             return Center(
-              child: Text("No data "),
+              child: Text("No data."),
             );
           }
 
@@ -36,11 +36,7 @@ class _HomeState extends State<Home> {
             itemCount: data.length,
             itemBuilder: (ctx, idx) {
               return CountryCard(
-                countryName: data[idx].countryName,
-                popluation: data[idx].population,
-                capital: data[idx].capital,
-                region: data[idx].region,
-                flag: data[idx].flag,
+                country: data[idx],
               );
             },
           );
